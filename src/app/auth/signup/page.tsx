@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -15,8 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
-import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
-import { firebaseApp } from "@/lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { firebaseAuth } from "@/lib/firebase"; // Import the pre-initialized auth instance
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -32,8 +33,11 @@ export default function SignupPage() {
     setError(null);
 
     try {
-      const auth = getAuth(firebaseApp);
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      if (!firebaseAuth) {
+        setError("Firebase Authentication not initialized.");
+        return;
+      }
+      const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
       const user = userCredential.user;
 
       if (user) {
@@ -119,3 +123,4 @@ export default function SignupPage() {
     </div>
   );
 }
+

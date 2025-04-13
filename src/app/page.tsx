@@ -1,17 +1,18 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth, signOut } from "firebase/auth";
-import { firebaseApp } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
+import { firebaseApp, firebaseAuth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   let auth;
   try {
-    auth = getAuth(firebaseApp);
+    auth = firebaseAuth;
   } catch (e) {
     console.error('Firebase initialization error:', e);
     return <div className="text-center">Firebase Initialization Failed. Check console.</div>;
@@ -129,3 +130,4 @@ export default function Home() {
     </div>
   );
 }
+
