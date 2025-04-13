@@ -1,0 +1,41 @@
+
+[
+  {
+    "id": 1,
+    "question": "What does a red traffic light indicate?",
+    "options": ["Stop", "Proceed with caution", "Increase speed"],
+    "correctAnswer": "Stop"
+  },
+  {
+    "id": 2,
+    "question": "What is the speed limit in a residential area?",
+    "options": ["25 mph", "35 mph", "45 mph"],
+    "correctAnswer": "25 mph"
+  },
+  {
+    "id": 3,
+    "question": "When should you use your turn signal?",
+    "options": [
+      "Only when other cars are nearby",
+      "Before making any turn or lane change",
+      "Only at night"
+    ],
+    "correctAnswer": "Before making any turn or lane change"
+  },
+  {
+    "id": 4,
+    "question": "What does a yellow traffic light indicate?",
+    "options": ["Speed up", "Prepare to stop", "Continue at the same speed"],
+    "correctAnswer": "Prepare to stop"
+  },
+  {
+    "id": 5,
+    "question": "When are you allowed to pass another vehicle on the right?",
+    "options": [
+      "When the vehicle is making a left turn",
+      "Never",
+      "When you are on a one-way street"
+    ],
+    "correctAnswer": "When the vehicle is making a left turn"
+  }
+]
