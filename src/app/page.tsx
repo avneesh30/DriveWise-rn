@@ -36,6 +36,20 @@ export default function Home() {
             </CardContent>
           </Card>
 
+            <Card className="w-full max-w-sm p-4">
+                <CardHeader>
+                    <CardTitle>Rules of the Road</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                        Learn essential rules for safe and responsible driving.
+                    </p>
+                    <Link href="/rules">
+                        <Button className="w-full mt-4">Explore Rules</Button>
+                    </Link>
+                </CardContent>
+            </Card>
+
           <Card className="w-full max-w-sm p-4">
             <CardHeader>
               <CardTitle>Driving Tutorial</CardTitle>
