@@ -15,7 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
-import { signUp } from "@/services/auth";
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { firebaseApp } from "@/lib/firebase";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -31,16 +32,18 @@ export default function SignupPage() {
     setError(null);
 
     try {
-      const result = await signUp(email, password, name);
-      if (result.success && result.user) {
-        // Store user session in local storage
-        localStorage.setItem("user", JSON.stringify(result.user));
+      const auth = getAuth(firebaseApp);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (user) {
+        await updateProfile(user, { displayName: name });
         router.push("/");
       } else {
-        setError(result.message || "Signup failed");
+        setError("Signup failed");
       }
-    } catch (e) {
-      setError("An unexpected error occurred.");
+    } catch (error: any) {
+      setError(error.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }

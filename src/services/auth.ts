@@ -47,11 +47,6 @@ export async function signUp(email: string, password: string, name: string): Pro
   return {
     success: true,
     message: 'Signup successful',
-    user: {
-      id: '123',
-      email: email,
-      name: name,
-    },
   };
 }
 
@@ -67,11 +62,6 @@ export async function logIn(email: string, password: string): Promise<AuthResult
   return {
     success: true,
     message: 'Login successful',
-    user: {
-      id: '123',
-      email: email,
-      name: 'Test User',
-    },
   };
 }
 

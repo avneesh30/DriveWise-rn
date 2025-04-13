@@ -12,9 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
 import { useState } from "react";
-import { logIn } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { firebaseApp } from "@/lib/firebase";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -29,16 +30,17 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const result = await logIn(email, password);
-      if (result.success && result.user) {
-        // Store user session in local storage
-        localStorage.setItem("user", JSON.stringify(result.user));
+      const auth = getAuth(firebaseApp);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (user) {
         router.push("/");
       } else {
-        setError(result.message || "Login failed");
+        setError("Login failed");
       }
-    } catch (e) {
-      setError("An unexpected error occurred.");
+    } catch (error: any) {
+      setError(error.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
