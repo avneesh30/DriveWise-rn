@@ -9,7 +9,13 @@ import { firebaseApp } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const auth = getAuth(firebaseApp);
+  let auth;
+  try {
+    auth = getAuth(firebaseApp);
+  } catch (e) {
+    console.error('Firebase initialization error:', e);
+    return <div className="text-center">Firebase Initialization Failed. Check console.</div>;
+  }
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
